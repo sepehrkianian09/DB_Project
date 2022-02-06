@@ -124,7 +124,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 FILE_SIZE_LIMIT = 200000000
-
+#lili
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
