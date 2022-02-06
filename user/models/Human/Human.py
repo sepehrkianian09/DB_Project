@@ -18,7 +18,7 @@ def validate_file_size(value):
 
 
 class Human(models.Model):
-    nationality_code = models.AutoField(primary_key=True)
+    nationality_code = models.CharField(primary_key=True, max_length=10, validators=[])
 
     CUSTOMER = 'C'
     EMPLOYEE = 'E'
@@ -38,6 +38,11 @@ class Human(models.Model):
         default=MALE
     )
 
+    @staticmethod
+    def user_picture_path(instance, filename):
+        return f'human/{instance.nationality_code}/{filename}'
+        # return 'expense/{0}/{1}'.format(instance.payer.id, filename)
+
     picture = models.FileField(
         upload_to=user_picture_path,
         validators=[validate_file_size],
@@ -51,7 +56,4 @@ class Human(models.Model):
         ]
     )
 
-
-# todo needs sync
-def user_picture_path(instance: Human, filename):
-    return 'expense/{0}/{1}'.format(instance.payer.id, filename)
+    # todo دو جدول Customer و Employee کلید مشترک نداشته باشن، و وقتی داخل Human‌ یکی typeش هر چیزی هست، تو جدول مخالفش دگ اون id‌ موجود نباشه.
