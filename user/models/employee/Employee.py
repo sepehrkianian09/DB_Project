@@ -1,17 +1,17 @@
 from django.core.validators import MinLengthValidator
 from django.db import models
 
-from user.models.Human import Human
+from user.models.human import Human
 
 
 class Employee(models.Model):
     employee_id = models.ForeignKey(Human, on_delete=models.CASCADE, validators=[
-        # todo Human.type = 'E'
-    ])
+        # todo human.type = 'E'
+    ], primary_key=True)
 
     ON_WORK = 'O'
     FIRED = 'F'
-    STATUS_CHOICES = ((ON_WORK, 'Employee'), (FIRED, 'Customer'))
+    STATUS_CHOICES = ((ON_WORK, 'employee'), (FIRED, 'Customer'))
     status = models.CharField(
         max_length=1,
         choices=STATUS_CHOICES,
