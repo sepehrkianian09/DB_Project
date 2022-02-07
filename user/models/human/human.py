@@ -2,6 +2,8 @@ from django.core.exceptions import ValidationError
 from django.db import models
 
 from E_Bank import settings
+from utility.validators import FixedLengthValidator
+from datetime import date
 
 
 def bytes_to_megabytes(bytes):
@@ -22,8 +24,12 @@ def user_picture_path(instance, filename):
     # return 'expense/{0}/{1}'.format(instance.payer.id, filename)
 
 
+def validate_birthday_date(birthday_date):
+    return (date.today() - birthday_date).days > 6574.365
+
+
 class Human(models.Model):
-    nationality_code = models.CharField(primary_key=True, max_length=10, validators=[])
+    nationality_code = models.CharField(max_length=10, primary_key=True, validators=[FixedLengthValidator(10)])
 
     CUSTOMER = 'C'
     EMPLOYEE = 'E'
@@ -31,7 +37,8 @@ class Human(models.Model):
     type = models.CharField(
         max_length=1,
         choices=TYPE_CHOICES,
-        default=CUSTOMER
+        default=CUSTOMER,
+        validators=[FixedLengthValidator(1)]
     )
 
     MALE = 'M'
@@ -40,7 +47,8 @@ class Human(models.Model):
     sex = models.CharField(
         max_length=1,
         choices=SEX_CHOICES,
-        default=MALE
+        default=MALE,
+        validators=[FixedLengthValidator(1)]
     )
 
     picture = models.FileField(
@@ -53,5 +61,6 @@ class Human(models.Model):
     birthday_date = models.DateField(
         validators=[
             #     bigger equal than 18y
+            validate_birthday_date
         ]
     )
