@@ -1,3 +1,3 @@
 from .employee import *
-from .Manager import Manager
+from .manager import Manager
 from .human import *

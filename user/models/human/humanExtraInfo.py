@@ -1,7 +1,7 @@
 from django.core.validators import MinValueValidator, MinLengthValidator
 from django.db import models
 
-from user.models.human import Human
+from .human import Human
 
 
 class HumanPhoneNumber(models.Model):
