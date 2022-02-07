@@ -55,5 +55,3 @@ class Human(models.Model):
             #     bigger equal than 18y
         ]
     )
-
-    # todo دو جدول Customer و employee کلید مشترک نداشته باشن، و وقتی داخل Human‌ یکی typeش هر چیزی هست، تو جدول مخالفش دگ اون id‌ موجود نباشه.
