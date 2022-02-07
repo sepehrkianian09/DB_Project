@@ -3,7 +3,7 @@ from  django.db import models
 from user.models.Acount import Account
 from user.models.Human import Customer
 class CustomerAccount(models.Model):
-    customer_acc_id=models.ForeignKey(Account,on_delete=models.CASCADE())
+    customer_acc_id= models.ForeignKey(Employee, on_delete=models.CASCADE, primary_key=True)
     customer_id=models.ForeignKey(Customer)
     NORMAL = 'N'
     PROFITTING = 'P'

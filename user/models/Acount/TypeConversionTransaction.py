@@ -1,4 +1,4 @@
-from django.core.validators import
+
 from  django.db import models
 from user.models.Acount import CustomerAccount
 #todo: chejuri type ghablish nabashe mahdudiyat bezarim
