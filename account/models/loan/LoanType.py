@@ -1,30 +1,56 @@
-class Transaction(models.Model):
-    loan_type_id = models.BigAutoField(primary_key=True)
-    duration=models.(
+from django.core.validators import MinValueValidator, MaxValueValidator
+from django.db import models
 
-    )
-    amount = models.(
+from account.models.account import RegularAccount
+from account.models.account import BankAccount
 
-        validators=[
-                   > 0, < 3000000
+class LoanType(models.Model):
+    loan_type_id = models.AutoField(primary_key=True)
 
-    ]
-
-    )
-    payback_amount = models.(
+    amount = models.IntegerField(
 
         validators=[
-                   > 0, < 3000000
+            MaxValueValidator(3000000000)
 
-    ]
-
-    )
-    profit_rate(
-        #<100
-    )
-    penalty_rate(
+        ]
 
     )
+   #payback amount sefate majazi nazashtam
+    duration = models.IntegerField(
+
+        validators=[
+            MaxValueValidator(10)
+
+        ]
+
+    )
+    payment_duration = models.IntegerField(
+
+
+    )
+    profit_rate = models.IntegerField(
+
+        validators=[
+            MaxValueValidator(50)
+
+        ]
+
+    )
+
+    penalty_rate = models.IntegerField(
+
+        validators=[
+            MaxValueValidator(5)
+
+        ]
+
+    )
+    addition_penalty_rate = models.IntegerField(
+
+        validators=[
+            MaxValueValidator(2)
+
+        ])
 
 
 
