@@ -3,13 +3,17 @@ from django.db import models
 from account.models.customerAccount import customerAccount
 from financial.models.profit import profitingType
 from account.models import bankAccount
-from utility.validators import typed_foreign_key_validator_func
-from account.models.customerAccount.customerAccount import CustomerAccount
+from utility.validators import validate_typed_foreign_key
+from account.models.customerAccount import CustomerAccount
+
+
+def validate_id(employee_id):
+    return validate_typed_foreign_key(employee_id, CustomerAccount, CustomerAccount.PROFITING)
 
 
 class ProfitingAccount(models.Model):
     profiting_acc_id = models.ForeignKey(customerAccount, on_delete=models.CASCADE, primarykey=True, validators=[
-        typed_foreign_key_validator_func(CustomerAccount, CustomerAccount.PROFITING)
+        validate_id()
     ])
     prof_type_id = models.ForeignKey(profitingType, on_delete=models.CASCADE)
     prof_bank_acc_id = models.ForeignKey(bankAccount, on_delete=models.CASCADE)

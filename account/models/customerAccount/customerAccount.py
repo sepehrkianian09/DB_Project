@@ -1,13 +1,15 @@
 from django.db import models
 from account.models import Account
 from user.models import Customer
-from utility.validators import typed_foreign_key_validator_func
+from utility.validators import validate_typed_foreign_key
+
+
+def validate_id(employee_id):
+    return validate_typed_foreign_key(employee_id, Account, Account.CUSTOMER)
 
 
 class CustomerAccount(models.Model):
-    customer_acc_id = models.ForeignKey(Account, on_delete=models.CASCADE, primary_key=True, validators=[
-        typed_foreign_key_validator_func(Account, Account.CUSTOMER)
-    ])
+    customer_acc_id = models.ForeignKey(Account, on_delete=models.CASCADE, primary_key=True, validators=[validate_id])
     customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE)
 
     REGULAR = 'R'

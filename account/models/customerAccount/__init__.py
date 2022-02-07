@@ -1,3 +1,3 @@
 from .customerAccount import CustomerAccount
 from .regularAccount import RegularAccount
-from .typeConversionTransaction import TypeConversionTransaction
+from .typeConversionTransaction import TypeConversionTransaction, EmployeeChangeAccountTransaction

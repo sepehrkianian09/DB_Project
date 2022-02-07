@@ -1,9 +1,12 @@
 from django.db import models
-from utility.validators import typed_foreign_key_validator_func
+
+from utility.validators import validate_typed_foreign_key
 from .human import Human
 
 
+def validate_id(employee_id):
+    return validate_typed_foreign_key(employee_id, Human, Human.CUSTOMER)
+
+
 class Customer(models.Model):
-    employee_id = models.ForeignKey(Human, on_delete=models.CASCADE, validators=[
-        typed_foreign_key_validator_func(Human, Human.CUSTOMER)
-    ], primary_key=True)
+    customer_id = models.ForeignKey(Human, on_delete=models.CASCADE, validators=[validate_id], primary_key=True)

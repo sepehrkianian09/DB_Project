@@ -2,12 +2,16 @@ from django.core.validators import MinValueValidator
 from django.db import models
 
 from user.models.human import Human
-from utility.validators import typed_foreign_key_validator_func
+from utility.validators import validate_typed_foreign_key
+
+
+def validate_id(employee_id):
+    return validate_typed_foreign_key(employee_id, Human, Human.EMPLOYEE)
 
 
 class Employee(models.Model):
     employee_id = models.ForeignKey(Human, on_delete=models.CASCADE, validators=[
-        typed_foreign_key_validator_func(Human, Human.EMPLOYEE)
+        validate_id
     ], primary_key=True)
 
     ON_WORK = 'O'
