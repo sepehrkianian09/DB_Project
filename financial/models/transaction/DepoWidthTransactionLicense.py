@@ -1,6 +1,6 @@
 from django.core.validators import MaxValueValidator
 from  django.db import models
-from financial.transaction import DepositWithDrawTransaction
+from financial.models.transaction import DepositWithDrawTransaction
 from  user.models.Employee import Employee
 from  account.models.account import CustomerAccount
 class DepoWidthTransactionLicense(models.Model):

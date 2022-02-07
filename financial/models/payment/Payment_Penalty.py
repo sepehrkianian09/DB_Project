@@ -1,6 +1,6 @@
 from django.db import models
 from financial.models.loan import Loan
-from financial.transaction import CardToCardTransaction
+from financial.models.transaction import CardToCardTransaction
 
 
 class Payment_Penalty(models.Model):

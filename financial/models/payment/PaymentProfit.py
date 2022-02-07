@@ -1,5 +1,5 @@
 from django.db import models
-from financial.transaction import CardToCardTransaction
+from financial.models.transaction import CardToCardTransaction
 from account.models.account import ProfittingAccount
 
 
