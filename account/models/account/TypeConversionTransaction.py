@@ -13,6 +13,8 @@ class TypeConversionTransaction(models.Model):
         choices=CUSTOMER_ACC_TYPE_CHOICES,
         default=NORMAL
     )
+    class Meta:
+        unique_together = ['employee_id', 'working_day']
     conversion_date = models.DateField(
         validators=[
             #     date<now
