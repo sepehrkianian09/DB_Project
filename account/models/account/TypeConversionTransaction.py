@@ -1,6 +1,7 @@
 
 from  django.db import models
 from account.models.account import CustomerAccount
+#vaa
 #todo: chejuri type ghablish nabashe mahdudiyat bezarim
 class TypeConversionTransaction(models.Model):
     id = models.AutoField(primary_key=True)
