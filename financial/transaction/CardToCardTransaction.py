@@ -1,6 +1,5 @@
 from django.db import models
-from account.models.loan import Loan
-from account.models.transaction import Transaction
+from financial.transaction import Transaction
 from account.models.account import Account
 
 

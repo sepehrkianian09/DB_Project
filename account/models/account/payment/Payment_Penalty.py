@@ -1,6 +1,7 @@
 from django.db import models
-from account.models.loan import Loan
-from account.models.transaction import CardToCardTransaction
+from financial.loan import Loan
+from financial.transaction import CardToCardTransaction
+
 
 class Payment_Penalty(models.Model):
     payement_Uniqueid = models.BigAutoField(primary_key=True)

@@ -1,6 +1,6 @@
 from django.db import models
-from account.models.loan import Loan
-from account.models.transaction import Transaction
+from financial.transaction import Transaction
+
 
 class DepositWithDrawTransaction(models.Model):
 
