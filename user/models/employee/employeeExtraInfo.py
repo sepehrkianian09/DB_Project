@@ -37,7 +37,7 @@ class EmployeeChangeAccountTransaction(models.Model):
         validate_employee_on_change_account
     ])
     account_id = models.ForeignKey(Account, on_delete=models.CASCADE)
-    date = models.DateTimeField(auto_now_add=True)
+    date = models.DateTimeField(auto_now_add=True, editable=False)
 
     # constraint: Account.state = count(ChangeAccountTransaction) % 2 == 0
 

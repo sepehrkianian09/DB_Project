@@ -13,8 +13,6 @@ class ProfitingAccount(models.Model):
     ])
     prof_type_id = models.ForeignKey(profitingType, on_delete=models.CASCADE)
     prof_bank_acc_id = models.ForeignKey(bankAccount, on_delete=models.CASCADE)
-    profiting_start_date = models.DateTimeField(
-        auto_now_add=True,
-    )
+    profiting_start_date = models.DateTimeField(auto_now_add=True, editable=False)
 
 #     on Save, create ProfitPayments for this.
