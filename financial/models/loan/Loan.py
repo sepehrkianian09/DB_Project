@@ -1,6 +1,6 @@
 from django.db import models
 
-from financial.loan import LoanType
+from financial.models.loan import LoanType
 from account.models.account import RegularAccount
 from account.models.account import BankAccount
 
