@@ -1,15 +1,15 @@
 from django.core.exceptions import ValidationError
-from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
 
-class LoanType(models.Model):
-    loan_type_id = models.AutoField(primary_key=True)
+class ProfitingType(models.Model):
+    prof_type_id = models.AutoField(primarykey=True)
 
-    amount = models.IntegerField(
+    profit_rate = models.FloatField(
         validators=[
             MinValueValidator(0),
-            MaxValueValidator(3000000000)
+            MaxValueValidator(100)
         ]
     )
 
@@ -27,16 +27,9 @@ class LoanType(models.Model):
         ]
     )
 
-    profit_rate = models.FloatField(
+    monthly_withdraw_limit = models.IntegerField(
         validators=[
-            MinValueValidator(0),
-            MaxValueValidator(100)
-        ]
-    )
-    penalty_rate = models.FloatField(
-        validators=[
-            MinValueValidator(0),
-            MaxValueValidator(100)
+            MaxValueValidator(50)
         ]
     )
 

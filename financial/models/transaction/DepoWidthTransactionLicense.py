@@ -2,13 +2,15 @@ from django.core.validators import MaxValueValidator
 from  django.db import models
 from financial.models.transaction import DepositWithDrawTransaction
 from  user.models.Employee import Employee
-from  account.models.account import CustomerAccount
+from account.models.customerAccount import customerAccount
+
+
 class DepoWidthTransactionLicense(models.Model):
     transaction_id = models.AutoField(primary_key=True)
     depo_width_transaction_id = models.ForeignKey(DepositWithDrawTransaction, on_delete=models.CASCADE())
     employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE())
 
-    customer_acc_id = models.ForeignKey(CustomerAccount, on_delete=models.CASCADE())
+    customer_acc_id = models.ForeignKey(customerAccount, on_delete=models.CASCADE())
 
 
     CARD_TO_CARD = 'C'

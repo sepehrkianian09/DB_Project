@@ -2,12 +2,12 @@ from django.core.validators import MinValueValidator
 from django.db import models
 
 from financial.models.transaction import CardToCardTransaction
-from account.models.account import ProfittingAccount
+from account.models.customerAccount import profitingAccount
 
 
 class ProfitPayment(models.Model):
     payment_penalty_id = models.BigAutoField(primary_key=True)
-    profiting_account_id = models.ForeignKey(ProfittingAccount, on_delete=models.CASCADE)
+    profiting_account_id = models.ForeignKey(profitingAccount, on_delete=models.CASCADE)
     card_to_card_transaction_id = models.ForeignKey(CardToCardTransaction, on_delete=models.CASCADE, null=True,
                                                     blank=True)
     payment_index = models.IntegerField(validators=[
