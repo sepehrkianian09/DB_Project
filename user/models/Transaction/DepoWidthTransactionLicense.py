@@ -1,5 +1,7 @@
+from  django.db import models
+
 class DepoWidthTransactionLicense(models.Model):
-    transaction_id = models.BigAutoField(primary_key=True)
+    transaction_id = models.AutoField(primary_key=True)
     CARD_TO_CARD = 'C'
     DEPO_WIDTH_DRAW = 'D'
     TRANS_TYPE_CHOICES = ((CARD_TO_CARD, 'card_to_card'), (DEPO_WIDTH_DRAW, 'depo_width_draw'))
