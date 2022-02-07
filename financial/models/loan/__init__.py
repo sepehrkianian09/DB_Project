@@ -1,2 +1,2 @@
-from .Loan import Loan
-from .LoanType import LoanType
+from .loan import Loan
+from .loanType import LoanType

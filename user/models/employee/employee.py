@@ -1,8 +1,6 @@
 from django.core.exceptions import ValidationError
-from django.core.validators import MinValueValidator, BaseValidator
+from django.core.validators import MinValueValidator
 from django.db import models
-from django.utils.deconstruct import deconstructible
-from django.utils.translation import gettext_lazy as _, ngettext_lazy
 
 from user.models.human import Human
 
@@ -10,8 +8,7 @@ from user.models.human import Human
 def validate_id(employee_id):
     if Human.objects.get(pk=employee_id).type != Human.EMPLOYEE:
         raise ValidationError(
-            _('%(value)s is not an Employee Instance'),
-            params={'value': employee_id},
+            f'{employee_id}s is not an Employee Instance'
         )
 
 
