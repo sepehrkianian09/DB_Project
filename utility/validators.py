@@ -22,3 +22,14 @@ def validate_phone_number(phone_number):
         pass
     elif not phone_number.startswith('+98'):
         raise ValidationError(f"phone_number is not valid")
+
+
+def validate_typed_foreign_key(employee_id, class_name, type_name):
+    if class_name.objects.get(pk=employee_id).type != type_name:
+        raise ValidationError(
+            f'{employee_id} in {class_name} is not a/an {type_name} Instance'
+        )
+
+
+def typed_foreign_key_validator_func(class_name, type_name):
+    return lambda employee_id: validate_typed_foreign_key(employee_id, class_name, type_name)

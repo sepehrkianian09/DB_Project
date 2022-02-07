@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
+from account.models import Account
 from .employee import Employee
 
 
@@ -35,10 +36,10 @@ class EmployeeChangeAccountTransaction(models.Model):
     employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE, validators=[
         validate_employee_on_change_account
     ])
-    # account_id = models.ForeignKey(employee, on_delete=models.CASCADE)
+    account_id = models.ForeignKey(Account, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
 
     # constraint: Account.state = count(ChangeAccountTransaction) % 2 == 0
 
-    # class Meta:
-    # unique_together = ['account_id', 'date']
+    class Meta:
+        unique_together = ['account_id', 'date']

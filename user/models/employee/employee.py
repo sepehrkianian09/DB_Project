@@ -1,20 +1,13 @@
-from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator
 from django.db import models
 
 from user.models.human import Human
-
-
-def validate_id(employee_id):
-    if Human.objects.get(pk=employee_id).type != Human.EMPLOYEE:
-        raise ValidationError(
-            f'{employee_id}s is not an Employee Instance'
-        )
+from utility.validators import typed_foreign_key_validator_func
 
 
 class Employee(models.Model):
     employee_id = models.ForeignKey(Human, on_delete=models.CASCADE, validators=[
-        validate_id
+        typed_foreign_key_validator_func(Human, Human.EMPLOYEE)
     ], primary_key=True)
 
     ON_WORK = 'O'
