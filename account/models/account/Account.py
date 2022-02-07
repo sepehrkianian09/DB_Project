@@ -6,7 +6,7 @@ class Account(models.Model):
     acc_id = models.AutoField(primary_key=True)
     CUSTOMER = 'C'
     MANAGER = 'M'
-    ACC_TYPE_CHOICES = ((MANAGER, 'Employee'), (CUSTOMER, 'Customer'))
+    ACC_TYPE_CHOICES = ((MANAGER, 'Manager'), (CUSTOMER, 'Customer'))
     type = models.CharField(
         max_length=1,
         choices=ACC_TYPE_CHOICES,
