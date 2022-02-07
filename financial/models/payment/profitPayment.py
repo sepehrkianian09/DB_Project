@@ -2,7 +2,7 @@ from django.core.validators import MinValueValidator
 from django.db import models
 
 from financial.models.transaction import cardToCardTransaction
-from account.models.customerAccount import profitingAccount
+from financial.models.profit import profitingAccount
 
 
 class ProfitPayment(models.Model):

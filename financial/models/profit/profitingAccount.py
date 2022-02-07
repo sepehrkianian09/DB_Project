@@ -1,10 +1,10 @@
 from django.db import models
 
 from account.models.customerAccount import customerAccount
+from financial.models.profit import profitingType
 from account.models import bankAccount
 from utility.validators import typed_foreign_key_validator_func
-from .customerAccount import CustomerAccount
-from financial.models.loan import profitingType
+from account.models.customerAccount.customerAccount import CustomerAccount
 
 
 class ProfitingAccount(models.Model):
