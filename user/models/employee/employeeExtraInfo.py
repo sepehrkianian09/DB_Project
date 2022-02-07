@@ -41,4 +41,4 @@ class EmployeeChangeAccountTransaction(models.Model):
     # constraint: Account.state = count(ChangeAccountTransaction) % 2 == 0
 
     # class Meta:
-    # unique_together = ['employee_id', 'account_id', 'date']
+    # unique_together = ['account_id', 'date']
