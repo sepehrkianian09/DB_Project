@@ -1,7 +1,9 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+
+
 class Account(models.Model):
-    acc_id=models.AutoField(primary_key=True)
+    acc_id = models.AutoField(primary_key=True)
     CUSTOMER = 'C'
     MANAGER = 'M'
     ACC_TYPE_CHOICES = ((MANAGER, 'Employee'), (CUSTOMER, 'Customer'))
@@ -34,4 +36,3 @@ class Account(models.Model):
             #     date<now
         ]
     )
-

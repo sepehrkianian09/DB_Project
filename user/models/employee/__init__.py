@@ -1,2 +1,2 @@
-from .Employee import Employee
-from .EmployeeExtraInfo import EmployeeChangeAccountTransaction, EmployeeWorkingHours
+from .employee import Employee
+from .employeeExtraInfo import EmployeeChangeAccountTransaction, EmployeeWorkingHours

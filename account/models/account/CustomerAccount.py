@@ -1,9 +1,9 @@
 from django.core.validators import
 from  django.db import models
-from user.models.Acount import Account
+from account.models.account import Account
 from user.models.Human import Customer
 class CustomerAccount(models.Model):
-    customer_acc_id=models.ForeignKey(Account,on_delete=models.CASCADE())
+    customer_acc_id=models.ForeignKey(Account, on_delete=models.CASCADE())
     customer_id=models.ForeignKey(Customer)
     NORMAL = 'N'
     PROFITTING = 'P'
