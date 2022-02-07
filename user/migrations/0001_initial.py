@@ -5,8 +5,7 @@ import django.core.validators
 from django.db import migrations, models
 import django.db.models.deletion
 import user.models.employee.employee
-import user.models.employee.employeeExtraInfo
-import user.models.human.human
+import user.models.human
 import utility.validators
 
 

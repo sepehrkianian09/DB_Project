@@ -1,12 +1,15 @@
 from django.core.validators import MinValueValidator, MinLengthValidator
 from django.db import models
 
-from .human import Human
+from utility.validators import validate_phone_number
+from user.models.human import Human
 
 
 class HumanPhoneNumber(models.Model):
     nationality_code = models.ForeignKey(Human, on_delete=models.CASCADE)
-    phone_number = models.CharField(primary_key=True, validators=[], max_length=20)
+    phone_number = models.CharField(primary_key=True, validators=[
+        validate_phone_number
+    ], max_length=20)
 
 
 class HumanName(models.Model):

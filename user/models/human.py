@@ -1,22 +1,9 @@
 from django.core.exceptions import ValidationError
+from django.core.validators import MinLengthValidator
 from django.db import models
-
-from E_Bank import settings
-from utility.validators import FixedLengthValidator
 from datetime import date
 
-
-def bytes_to_megabytes(bytes):
-    return bytes / 1000000
-
-
-def validate_file_size(value):
-    filesize = value.size
-
-    if filesize > settings.FILE_SIZE_LIMIT:
-        raise ValidationError(f"حداکثر سایز فایل می‌تواند {bytes_to_megabytes(settings.FILE_SIZE_LIMIT)}MB باشد")
-    else:
-        return value
+from utility.validators import validate_file_size
 
 
 def user_picture_path(instance, filename):
@@ -24,12 +11,13 @@ def user_picture_path(instance, filename):
     # return 'expense/{0}/{1}'.format(instance.payer.id, filename)
 
 
+#     bigger equal than 18y
 def validate_birthday_date(birthday_date):
     return (date.today() - birthday_date).days > 6574.365
 
 
 class Human(models.Model):
-    nationality_code = models.CharField(max_length=10, primary_key=True, validators=[FixedLengthValidator(10)])
+    nationality_code = models.CharField(max_length=10, primary_key=True, validators=[MinLengthValidator(10)])
 
     CUSTOMER = 'C'
     EMPLOYEE = 'E'
@@ -38,7 +26,7 @@ class Human(models.Model):
         max_length=1,
         choices=TYPE_CHOICES,
         default=CUSTOMER,
-        validators=[FixedLengthValidator(1)]
+        validators=[MinLengthValidator(1)]
     )
 
     MALE = 'M'
@@ -48,7 +36,7 @@ class Human(models.Model):
         max_length=1,
         choices=SEX_CHOICES,
         default=MALE,
-        validators=[FixedLengthValidator(1)]
+        validators=[MinLengthValidator(1)]
     )
 
     picture = models.FileField(
@@ -60,7 +48,6 @@ class Human(models.Model):
 
     birthday_date = models.DateField(
         validators=[
-            #     bigger equal than 18y
             validate_birthday_date
         ]
     )

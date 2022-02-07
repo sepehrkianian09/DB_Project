@@ -1,18 +1,24 @@
-from django.core.validators import BaseValidator
-from django.utils.deconstruct import deconstructible
-from django.utils.translation import ngettext_lazy
+from django.core.exceptions import ValidationError
+
+from E_Bank import settings
 
 
-@deconstructible
-class FixedLengthValidator(BaseValidator):
-    message = ngettext_lazy(
-        'Ensure this value has exactly %(limit_value)d character (it has %(show_value)d).',
-        'Ensure this value has exactly %(limit_value)d characters (it has %(show_value)d).',
-        'limit_value')
-    code = 'fixed_length'
+def bytes_to_megabytes(bytes):
+    return bytes / 1000000
 
-    def compare(self, a, b):
-        return a == b
 
-    def clean(self, x):
-        return len(x)
+def validate_file_size(value):
+    filesize = value.size
+
+    if filesize > settings.FILE_SIZE_LIMIT:
+        raise ValidationError(f"حداکثر سایز فایل می‌تواند {bytes_to_megabytes(settings.FILE_SIZE_LIMIT)}MB باشد")
+    else:
+        return value
+
+
+def validate_phone_number(phone_number):
+    if phone_number.startswith('09') and len(phone_number) == 11:
+        # phone_number = '+98' + phone_number[1:]
+        pass
+    elif not phone_number.startswith('+98'):
+        raise ValidationError(f"phone_number is not valid")
