@@ -1,10 +1,10 @@
 
 from  django.db import models
-from user.models.Acount import CustomerAccount
+from account.models.account import CustomerAccount
 #todo: chejuri type ghablish nabashe mahdudiyat bezarim
 class TypeConversionTransaction(models.Model):
     id = models.AutoField(primary_key=True)
-    customer_acc_id=models.ForeignKey(CustomerAccount,on_delete=models.CASCADE())
+    customer_acc_id=models.ForeignKey(CustomerAccount, on_delete=models.CASCADE())
     NORMAL = 'N'
     PROFITTING = 'P'
     CUSTOMER_ACC_TYPE_CHOICES = ((PROFITTING, 'profiting'), (NORMAL, 'normal'))
