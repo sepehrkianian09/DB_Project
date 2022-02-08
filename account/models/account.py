@@ -15,12 +15,12 @@ class Account(models.Model):
     )
 
     CLOSED = 'C'
-    UNCLOSED = 'U'
-    STATE_CHOICES = ((CLOSED, 'closed'), (UNCLOSED, 'unclosed'))
+    OPEN = 'O'
+    STATE_CHOICES = ((CLOSED, 'closed'), (OPEN, 'unclosed'))
     state = models.CharField(
         max_length=1,
         choices=STATE_CHOICES,
-        default=CLOSED
+        default=OPEN
     )
 
     balance = models.IntegerField(default=0, validators=[

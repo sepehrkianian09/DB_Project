@@ -20,3 +20,12 @@ class CustomerAccount(models.Model):
         choices=CUSTOMER_ACC_TYPE_CHOICES,
         default=REGULAR
     )
+
+
+def validate_regular_account_id(employee_id):
+    return validate_typed_foreign_key(employee_id, CustomerAccount, CustomerAccount.REGULAR)
+
+
+class RegularAccount(models.Model):
+    regular_acc_id = models.ForeignKey(CustomerAccount, primary_key=True, on_delete=models.CASCADE,
+                                       validators=[validate_regular_account_id])
