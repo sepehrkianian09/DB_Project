@@ -1,14 +1,28 @@
-Create View CUSTOMER
-        AS SELECT nationality_code,sex,picture from CUSTOMER where nationality_code=0440985609
- CREATE VIEW CUSTOMERPHONENUMBER
-        AS SELECT nationality_code, phone_number from HumanPhoneNumber where nationality_code=0440985609
+#human
+Create View CUSTOMER_VIEW
+        AS SELECT nationality_code, sex, picture, birthday_date from CUSTOMER Natural Join Human
+CREATE VIEW CUSTOMER_PHONENUMBER
+        AS SELECT nationality_code, phone_number from CUSTOMER Natural Join HumanPhoneNumber
+CREATE VIEW CUSTOMER_NAME
+        AS SELECT nationality_code, first_name,last_name,fathers_name from CUSTOMER Natural Join HumanName
+CREATE VIEW CUSTOMER_ADDRESS
+        AS SELECT nationality_code, province,city,zone,complete_addr,postal_code from CUSTOMER Natural Join HumanAddress
 
- CREATE VIEW CUSTOMER_NAME
-        AS SELECT nationality_code, first_name,last_name,fathers_name from HumanName where nationality_code=0440985609
- CREATE VIEW CUSTOMER_BIRTHDAY
-        AS SELECT nationality_code, date from HumanName where nationality_code=0440985609
-  CREATE VIEW CUSTOMER_ADDRESS
-        AS SELECT nationality_code, province,city,zone,complete_addr,postal_code from HumanName where nationality_code=0440985609
+CREATE VIEW EMPLOYEE_VIEW
+        AS SELECT statues,fee,block_account_property from EMPLOYEE Natural Join Human
+CREATE VIEW EMPLOYEE_PHONENUMBER
+        AS SELECT nationality_code, phone_number from EMPLOYEE Natural Join HumanPhoneNumber
+CREATE VIEW EMPLOYEE_NAME
+        AS SELECT nationality_code, first_name,last_name,fathers_name from EMPLOYEE Natural Join HumanName
+CREATE VIEW EMPLOYEE_ADDRESS
+        AS SELECT nationality_code, province,city,zone,complete_addr,postal_code from EMPLOYEE Natural Join HumanAddress
+
+CREATE VIEW EMPLOYEE_WORKING_HOURS_VIEW
+        AS SELECT start_hour,end_hour,working_Day from EMPLOYEEWORKINGHOURS Natural Join Employee
+CREATE VIEW CHANGE_ACCOUNT_TRANSACTION_VIEW
+    AS SELECT employee_id,acc_id,new_date,date from CHANGE_ACCOUNT_TRANSACTION
+
+#Customer
 CREATE VIEW CALCULATED_MONEY_SINCE_ACCOUNT_CREATION
         AS SELECT in, out,city from HumanName where customer_acc_id=1234567890
  CREATE VIEW CUSTOMER_ACCOUNT
@@ -19,27 +33,6 @@ CREATE VIEW CALCULATED_MONEY_SINCE_ACCOUNT_CREATION
         AS SELECT card_to_card_transaction_id, customer_id,customer_acc_type,state,creation_date,balance from HumanName where customer_acc_id=1234567890
    CREATE VIEW CUSTOMER_ACCOUNT
         AS SELECT customer_acc_id, customer_id,customer_acc_type,state,creation_date,balance from HumanName where customer_acc_id=1234567890
-
-
-
-#human
-Create View HUMAN
-        AS SELECT nationality_code,sex,picture from CUSTOMER where nationality_code=0440985000
- CREATE VIEW HUMANPHONENUMBER
-        AS SELECT nationality_code, phone_number from HumanPhoneNumber where nationality_code=0440985000
-
- CREATE VIEW HUMAN_NAME
-        AS SELECT nationality_code, first_name,last_name,fathers_name from HumanName where nationality_code=0440985000
- CREATE VIEW HUMAN_BIRTHDAY
-        AS SELECT nationality_code, date from HumanName where nationality_code=0440985000
-  CREATE VIEW HUMAN_ADDRESS
-        AS SELECT nationality_code, province,city,zone,complete_addr,postal_code from HumanName where nationality_code=0440985000
-  CREATE VIEW EMPLOYEE
-        AS SELECT statues,fee,block_account_property from EMPLOYEE where EMPLOYEE_ID=0987654321
-  CREATE VIEW WORKING_HOURS
-        AS SELECT start_hour,end_hour,working_Day from EMPLOYEE where EMPLOYEE.EMPLOYEE_ID=0987654321
-CREATE VIEW CHANGE_ACCOUNT_TRANSACTION
-    AS SELECT employee_id,acc_id,new_date,date from EMPLOYEE where EMPLOYEE.EMPLOYEE_ID=0987654321
 
 #view for manager:
 CREATE VIEW LOAN
