@@ -2,8 +2,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator
 from django.db import models
 
-from account.models import Account, CustomerAccount
-from .depoWithTransactionLicense import DepoWithTransactionLicense
+from account.models import Account
 
 
 class Transaction(models.Model):
@@ -36,14 +35,4 @@ class CardToCardTransaction(Transaction):
 
 
 class DepositWithDrawTransaction(Transaction):
-    def clean(self):
-        super().clean()
-        if not self.applied:
-            license = DepoWithTransactionLicense.objects.get(depo_with_transaction_id=self.transaction_id)
-            src_account = CustomerAccount.objects.get(pk=license.customer_acc_id)
-
-            if src_account.balance - self.amount < 0:
-                raise ValidationError("src doesn't have enough money")
-            src_account.balance -= self.amount
-            src_account.save()
-            self.applied = True
+    pass

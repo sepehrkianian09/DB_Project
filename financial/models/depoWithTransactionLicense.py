@@ -37,10 +37,20 @@ class DepoWithTransactionLicense(models.Model):
         if self.expiration_date <= self.creation_date:
             raise ValidationError("expiration_date is not valid")
 
-        if self.transaction_id is not None:
-            depo_with_transaction = DepositWithDrawTransaction.objects.get(pk=self.transaction_id)
+        if self.depo_with_transaction_id is not None:
+            depo_with_transaction = DepositWithDrawTransaction.objects.get(pk=self.depo_with_transaction_id)
 
             if depo_with_transaction.amount > self.transaction_limit:
                 raise ValidationError("Transaction has reached amount limit")
             if depo_with_transaction.date > self.expiration_date:
                 raise ValidationError("Transaction has executed later than Expiration Date")
+
+            if depo_with_transaction.applied is None:
+                src_account = CustomerAccount.objects.get(pk=self.customer_acc_id)
+
+                if src_account.balance - depo_with_transaction.amount < 0:
+                    raise ValidationError("src doesn't have enough money")
+                src_account.balance -= depo_with_transaction.amount
+                src_account.save()
+                depo_with_transaction.applied = True
+                depo_with_transaction.save()
