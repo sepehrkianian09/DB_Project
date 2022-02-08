@@ -17,6 +17,11 @@ class ProfitPayment(Payment):
             c2c_transaction = CardToCardTransaction.objects.get(pk=self.card_to_card_transaction_id)
 
             selected_loan_profit = self.loan_profit_class.objects.get(pk=self.loan_profit_id)
+            if c2c_transaction.src != selected_loan_profit.bank_acc_id:
+                raise ValidationError("Transaction is not valid. dst != bank_acc_id")
+            if c2c_transaction.dst != selected_loan_profit.id:
+                raise ValidationError("Transaction is not valid. src != profit_acc_id")
+
             selected_type = self.loan_profit_class.type_class.objects.get(pk=selected_loan_profit.type_id)
             num_of_payments = selected_type.duration / selected_type.payment_duration
 
