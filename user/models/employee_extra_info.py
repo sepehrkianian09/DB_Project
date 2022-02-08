@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
-from .employee import Employee
+from user.models.employee import Employee
 
 
 class EmployeeWorkingHours(models.Model):
