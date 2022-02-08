@@ -1,9 +1,7 @@
 from django.core.exceptions import ValidationError
 from django.core.validators import MaxValueValidator
 from django.db import models
-
-from .transaction import Transaction
-from .depositWithDrawTransaction import DepositWithDrawTransaction
+from .transaction import DepositWithDrawTransaction
 from user.models import Employee
 from account.models import CustomerAccount
 
@@ -40,10 +38,9 @@ class DepoWithTransactionLicense(models.Model):
             raise ValidationError("expiration_date is not valid")
 
         if self.transaction_id is not None:
-            depowith_transaction = DepositWithDrawTransaction.objects.get(pk=self.transaction_id)
-            transaction = Transaction.objects.get(pk=depowith_transaction.depo_with_transaction_id)
+            depo_with_transaction = DepositWithDrawTransaction.objects.get(pk=self.transaction_id)
 
-            if transaction.amount > self.transaction_limit:
+            if depo_with_transaction.amount > self.transaction_limit:
                 raise ValidationError("Transaction has reached amount limit")
-            if transaction.date > self.expiration_date:
+            if depo_with_transaction.date > self.expiration_date:
                 raise ValidationError("Transaction has executed later than Expiration Date")

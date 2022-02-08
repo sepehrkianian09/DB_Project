@@ -3,13 +3,11 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
 
-class LoanType(models.Model):
-    loan_type_id = models.AutoField(primary_key=True)
-
-    amount = models.IntegerField(
+class LoanProfitType(models.Model):
+    profit_rate = models.FloatField(
         validators=[
             MinValueValidator(0),
-            MaxValueValidator(3000000000)
+            MaxValueValidator(1)
         ]
     )
 
@@ -27,20 +25,10 @@ class LoanType(models.Model):
         ]
     )
 
-    profit_rate = models.FloatField(
-        validators=[
-            MinValueValidator(0),
-            MaxValueValidator(100)
-        ]
-    )
-    penalty_rate = models.FloatField(
-        validators=[
-            MinValueValidator(0),
-            MaxValueValidator(100)
-        ]
-    )
-
     def clean(self):
         super().clean()
         if int(self.duration) % int(self.payment_duration) != 0:
             raise ValidationError(f"duration must be dividable by payment_duration")
+
+    class Meta:
+        abstract = True
