@@ -3,7 +3,8 @@ from django.core.validators import MinValueValidator
 from django.db import models
 
 from .payment import Payment
-from ... import Loan, CardToCardTransaction
+from ..objects import Loan
+from ... import CardToCardTransaction
 
 
 # a class which turns to either payment or penalty(if transaction has crossed the line)

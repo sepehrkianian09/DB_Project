@@ -1,6 +1,6 @@
 from django.db import models
 
-from user.models.Employee import Employee
+from .employee import Employee
 
 
 class Manager(models.Model):

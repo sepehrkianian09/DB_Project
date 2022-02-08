@@ -1,3 +1,3 @@
 from .transaction import Transaction, CardToCardTransaction, DepositWithDrawTransaction
 from .depoWithTransactionLicense import DepoWithTransactionLicense
-from .loanProfit import *
+from .loan_and_profit import *

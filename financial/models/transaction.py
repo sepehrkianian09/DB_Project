@@ -15,8 +15,8 @@ class Transaction(models.Model):
 
 
 class CardToCardTransaction(Transaction):
-    src = models.ForeignKey(Account, on_delete=models.CASCADE)
-    dst = models.ForeignKey(Account, on_delete=models.CASCADE)
+    src = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='%(class)s_src')
+    dst = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='%(class)s_dst')
 
     def clean(self):
         super().clean()

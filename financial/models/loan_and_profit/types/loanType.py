@@ -1,7 +1,7 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
-from financial.models.loanProfit.types.loanProfitType import LoanProfitType
+from financial.models.loan_and_profit.types.loanProfitType import LoanProfitType
 
 
 class LoanType(LoanProfitType):
