@@ -5,13 +5,13 @@ from account.models import BankAccount, RegularAccount
 from .loanProfit import LoanProfit
 from ..types.loanType import LoanType
 
-from datetime import date
+from datetime import datetime
 
 from ... import CardToCardTransaction
 
 
 def check_if_is_future(start_date):
-    if start_date < date.today():
+    if start_date < datetime.now():
         raise ValidationError(f"start_date must be later than now")
 
 
@@ -21,7 +21,7 @@ class Loan(LoanProfit):
     type_id = models.ForeignKey(LoanType, on_delete=models.CASCADE)
     bank_acc_id = models.ForeignKey(BankAccount, on_delete=models.CASCADE)
 
-    start_date = models.DateField(
+    start_date = models.DateTimeField(
         validators=[
             check_if_is_future
         ]
