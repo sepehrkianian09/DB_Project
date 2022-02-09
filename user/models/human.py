@@ -13,7 +13,8 @@ def user_picture_path(instance, filename):
 
 #     bigger equal than 18y
 def validate_birthday_date(birthday_date):
-    return (date.today() - birthday_date).days > 6574.365
+    if (date.today() - birthday_date).days < 6574.365:
+        raise ValidationError(f"you must be at least 18 years old")
 
 
 class Human(models.Model):

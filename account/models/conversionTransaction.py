@@ -9,7 +9,7 @@ from account.models import Account
 class ConversionTransaction(models.Model):
     id = models.AutoField(primary_key=True)
     account_id = None
-    date = models.DateField(auto_now_add=True, editable=False)
+    date = models.DateTimeField(auto_now_add=True, editable=False)
 
     class Meta:
         abstract = True
@@ -25,8 +25,8 @@ class TypeConversionTransaction(ConversionTransaction):
             self.__class__.objects.get(pk=self.id)
         except:
             try:
-                num_of_conversions = len(self.__class__.objects.get(account_id=self.account_id))
-                account = CustomerAccount.objects.get(pk=self.account_id)
+                num_of_conversions = len(self.__class__.objects.get(account_id=self.account_id.acc_id))
+                account = self.account_id
 
                 # state = False
                 if num_of_conversions % 2 == 0:
@@ -36,7 +36,7 @@ class TypeConversionTransaction(ConversionTransaction):
                     if account.type != CustomerAccount.REGULAR:
                         raise ValidationError(f"transaction hasn't been applied")
             except:
-                account = Account.objects.get(pk=self.account_id)
+                account = self.account_id
                 # state = False
                 if account.type != CustomerAccount.PROFITING:
                     raise ValidationError(f"transaction hasn't been applied")
@@ -61,8 +61,8 @@ class StateConversionTransaction(ConversionTransaction):
             self.__class__.objects.get(pk=self.id)
         except:
             try:
-                num_of_conversions = len(self.__class__.objects.get(account_id=self.account_id))
-                account = Account.objects.get(pk=self.account_id)
+                num_of_conversions = len(self.__class__.objects.get(account_id=self.account_id.acc_id))
+                account = self.account_id
                 # state = False
                 if num_of_conversions % 2 == 0:
                     if account.state != account.CLOSED:
@@ -71,7 +71,9 @@ class StateConversionTransaction(ConversionTransaction):
                     if account.state != account.OPEN:
                         raise ValidationError(f"transaction hasn't been applied")
             except:
-                account = Account.objects.get(pk=self.account_id)
+                # print('jesus', self.account_id)
+                # account = Account.objects.get(pk=self.account_id)
+                account = self.account_id
                 # state = False
                 if account.state != account.CLOSED:
                     raise ValidationError(f"transaction hasn't been applied")

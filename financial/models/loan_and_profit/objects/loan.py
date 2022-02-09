@@ -33,13 +33,13 @@ class Loan(LoanProfit):
 
     def clean(self):
         super().clean()
-        c2c_transaction = CardToCardTransaction.objects.get(pk=self.card_to_card_transaction_id)
+        c2c_transaction = self.card_to_card_transaction_id
 
         if c2c_transaction.src != self.bank_acc_id:
             raise ValidationError("loan_deposit_transaction is not valid. src != bank_acc_id")
         if c2c_transaction.dst != self.regular_acc_id:
             raise ValidationError("loan_deposit_transaction is not valid. dst != regular_acc_id")
 
-        loan_type = LoanType.objects.get(pk=self.type_id)
+        loan_type = self.type_id
         if abs(c2c_transaction.amount - loan_type.amount) > 0.1:
             raise ValidationError("loan_deposit_transaction amount is not valid.")

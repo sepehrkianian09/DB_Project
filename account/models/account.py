@@ -16,7 +16,7 @@ class Account(models.Model):
 
     CLOSED = 'C'
     OPEN = 'O'
-    STATE_CHOICES = ((CLOSED, 'closed'), (OPEN, 'unclosed'))
+    STATE_CHOICES = ((CLOSED, 'closed'), (OPEN, 'open'))
     state = models.CharField(
         max_length=1,
         choices=STATE_CHOICES,

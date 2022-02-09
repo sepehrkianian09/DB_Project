@@ -17,8 +17,8 @@ class Payment(models.Model):
 
     def clean(self):
         super().clean()
-        selected_loan_profit = self.loan_profit_class.objects.get(pk=self.loan_profit_id)
-        selected_type = self.loan_profit_class.type_class.objects.get(pk=selected_loan_profit.type_id)
+        selected_loan_profit = self.loan_profit_id
+        selected_type = selected_loan_profit.type_id
         num_of_payments = selected_type.duration / selected_type.payment_duration
         if self.payment_index >= num_of_payments:
             raise ValidationError(f"payment index is bigger than loan_type_limit")

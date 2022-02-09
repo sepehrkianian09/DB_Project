@@ -1,41 +1,26 @@
-#human
-Create View CUSTOMER_VIEW
-        AS SELECT nationality_code, sex, picture, birthday_date from CUSTOMER Natural Join Human
-CREATE VIEW CUSTOMER_PHONENUMBER
-        AS SELECT nationality_code, phone_number from CUSTOMER Natural Join HumanPhoneNumber
-CREATE VIEW CUSTOMER_NAME
-        AS SELECT nationality_code, first_name,last_name,fathers_name from CUSTOMER Natural Join HumanName
-CREATE VIEW CUSTOMER_ADDRESS
-        AS SELECT nationality_code, province,city,zone,complete_addr,postal_code from CUSTOMER Natural Join HumanAddress
-
-CREATE VIEW EMPLOYEE_VIEW
-        AS SELECT statues,fee,block_account_property from EMPLOYEE Natural Join Human
-CREATE VIEW EMPLOYEE_PHONENUMBER
-        AS SELECT nationality_code, phone_number from EMPLOYEE Natural Join HumanPhoneNumber
-CREATE VIEW EMPLOYEE_NAME
-        AS SELECT nationality_code, first_name,last_name,fathers_name from EMPLOYEE Natural Join HumanName
-CREATE VIEW EMPLOYEE_ADDRESS
-        AS SELECT nationality_code, province,city,zone,complete_addr,postal_code from EMPLOYEE Natural Join HumanAddress
-
-CREATE VIEW EMPLOYEE_WORKING_HOURS_VIEW
-        AS SELECT start_hour,end_hour,working_Day from EMPLOYEEWORKINGHOURS Natural Join Employee
-CREATE VIEW CHANGE_ACCOUNT_TRANSACTION_VIEW
-    AS SELECT employee_id,acc_id,new_date,date from CHANGE_ACCOUNT_TRANSACTION
-
-#Customer
-CREATE VIEW CALCULATED_MONEY_SINCE_ACCOUNT_CREATION
-        AS SELECT in, out,city from HumanName where customer_acc_id=1234567890
- CREATE VIEW CUSTOMER_ACCOUNT
-        AS SELECT customer_acc_id, customer_id,customer_acc_type,state,creation_date,balance from HumanName where customer_acc_id=1234567890
- CREATE VIEW TRANSACTION
-        AS SELECT transaction_id, type,amount,date from TRANSACTION where CUSTOMER.customer_acc_id=1234567890
-  CREATE VIEW CARD_TO_TRANSACTION
-        AS SELECT card_to_card_transaction_id, customer_id,customer_acc_type,state,creation_date,balance from HumanName where customer_acc_id=1234567890
-   CREATE VIEW CUSTOMER_ACCOUNT
-        AS SELECT customer_acc_id, customer_id,customer_acc_type,state,creation_date,balance from HumanName where customer_acc_id=1234567890
-
-#view for manager:
-CREATE VIEW LOAN
-    AS SELECT *FROM LoaN
-CREATE VIEW LOANTYPE
-    AS SELECT *FROM LoaNTYPE
+CREATE VIEW  CUSTOMERVIEW AS
+    SELECT nationality_code,sex,picture from user_human where type='c';
+CREATE VIEW CUSTOMERPHONENUMBER AS
+    SELECT *FROM CUSTOMERPHONENUMBER;
+CREATE VIEW CUSTOMERNAME AS
+    SELECT *FROM CUSTOMERNAME;
+CREATE VIEW CUSTOMERAccount AS
+    SELECT *FROM CUSTOMERAccount natural join account_account;
+CREATE VIEW EMPLOYEENAME AS
+    SELECT *FROM user_humanname natural join   (SELECT *FROM EMPLOYEE EXCEPT SELECT *FROM user_manager) ;
+CREATE VIEW CUSTOMERADDRESS AS
+    SELECT *FROM CUSTOMERADDRESS
+#edame darad:
+CREATE VIEW EMPLOYEE AS
+    (SELECT * FROM user_employee except (select * from user_manager natural join user_employee) )
+CREATE VIEW EMPLOYEE_PHONENUMBER AS
+     SELECT * FROM user_humanphonenumber INNER JOIN((SELECT *FROM user_employee EXCEPT SELECT *FROM user_manager) as x) on ;
+CREATE VIEW LOANTYPEVEIW AS
+    SELECT profit_rate,duration,amount,payment_duration,penalty_rate,amount*financial_loantype.penalty_rate/100 as returnal_value from financial_loantype
+ CREATE VIEW LOANVIEW AS
+ select (start_date + (duration * interval '30 days')) as end_date,start_date,bank_acc_id_id,regular_acc_id_id,type_id_id,bank_acc_id_id
+ FROM (financial_loan
+         LEFT JOIN financial_loantype fl on fl.id = financial_loan.type_id_id);
+CREATE VIEW PROFITACCOUNTVIEW AS
+    SELECT  (start_date + (payment_duration * interval '30 days')) as end_date,start_date,bank_acc_id_id,type_id_id from financial_profitingaccount left join financial_profitingtype fp on fp.id = financial_profitingaccount.type_id_id;
+SELECT* FROM financial_loantype
